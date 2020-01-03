@@ -1,15 +1,17 @@
 package recursion
 
-import "AlgorizmiGo/linkedLists"
-
-func SwapLinkedListNodes(head *linkedLists.Node) *linkedLists.Node {
+type Node struct {
+	Value int
+	Next *Node
+}
+func SwapLinkedListNodes(head *Node) *Node {
 	// Must append a dummy
-	var dummy *linkedLists.Node = &linkedLists.Node{Value: 0, Next: head}
+	var dummy *Node = &Node{Value: 0, Next: head}
 	doSwap(dummy, head, head.Next)
 	return dummy.Next
 }
 
-func doSwap(leftleft *linkedLists.Node, left *linkedLists.Node, right *linkedLists.Node) {
+func doSwap(leftleft *Node, left *Node, right *Node) {
 	// Exit condition
 	if left == nil || right == nil {
 		return
