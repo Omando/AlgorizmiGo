@@ -29,7 +29,7 @@ func (bb *BoundedBuffer) Enqueue(item int) {
 		bb.Condition.Wait()
 	}
 
-	fmt.Println("Buffer not full. Enqueueing")
+	fmt.Println("Buffer not full.Enqueueing")
 	bb.Data.PushBack(item)
 	bb.Condition.Broadcast()
 }
