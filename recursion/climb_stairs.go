@@ -5,18 +5,23 @@ func ClimbStairs(stepsCount int) int {
 }
 
 func solveClimbStairs(stepsCount int, currentStep int) int {
-	// Exit condition
+	// Exit condition 1: Return 1 if we have reached the final step to indicate
+	// that this leaf branch is a valid path from the root
 	if currentStep == stepsCount {
 		return 1;
 	}
 
-	oneStepCount := solveClimbStairs(stepsCount, currentStep+1);
-
-	twoStepCount := 0;
-	if currentStep + 2 <= stepsCount {
-		twoStepCount = solveClimbStairs(stepsCount, currentStep+2);
+	// Exit condition 2: Return 0 if we have overshoot the final step to indicate that
+	// this leaf branch should not be counted as a valid path from the root
+	//(see figure in document)
+	if currentStep > stepsCount {
+		return 0
 	}
 
-	return oneStepCount + twoStepCount;
+	// Two choices: one step or two steps. These two recursive calls
+	// create a binary tree.
+	oneStepCount := solveClimbStairs(stepsCount, currentStep+1);
+	twoStepCount := solveClimbStairs(stepsCount, currentStep+2);
 
+	return oneStepCount + twoStepCount;
 }
