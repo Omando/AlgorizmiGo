@@ -57,7 +57,7 @@ func getOptimalPath(paths []int) string {
 	optimalPath.WriteString("0 --> ")
 	from := paths[0]
 	for from < len(paths) {
-		var connector string = " --> "
+		var connector = " --> "
 		if from == len(paths)-1 {
 			connector = ""
 		}
