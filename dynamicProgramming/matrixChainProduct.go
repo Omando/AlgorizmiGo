@@ -20,7 +20,7 @@ func Calculate(dimensions []int) int {
 	var m [][]int = make([][]int, n)      // top level slice
 	var allCells []int = make([]int, n*n) // one large slice to hold all slices
 	// Loop over the rows, slicing each row from the front of the remaining allCells slice
-	for i := range allCells {
+	for i := range m {
 		m[i] = allCells[:n]
 		allCells = allCells[n:]
 	}
