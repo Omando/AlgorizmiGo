@@ -45,5 +45,5 @@ func Calculate(dimensions []int) int {
 			m[i][j] = min
 		}
 	}
-	return m[1][n-1]
+	return m[1][n-1] // Top right corner (excluding row zero)
 }
