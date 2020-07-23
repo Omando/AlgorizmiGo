@@ -13,10 +13,10 @@ func Calculate(dimensions []int) int {
 	// the matrix A[i]A[i+1]...A[j]. For example, m[1,4] = minimum cost for
 	// calculating matrix product A1A2A3A4
 	// Note regarding approach to  allocating a 2D slice: One approach is to allocate
-	//each slice independently; the other is to allocate a single array and point the
-	//individual slices into it. If the slices might grow or shrink, they should be
-	//allocated independently to avoid overwriting the next line; if not, it can be
-	//more efficient to construct the object with a single allocation
+	// each slice independently; the other is to allocate a single array and point the
+	// individual slices into it. If the slices might grow or shrink, they should be
+	// allocated independently to avoid overwriting the next line; if not, it can be
+	// more efficient to construct the object with a single allocation
 	var m [][]int = make([][]int, n)      // top level slice
 	var allCells []int = make([]int, n*n) // one large slice to hold all slices
 	// Loop over the rows, slicing each row from the front of the remaining allCells slice
