@@ -10,8 +10,8 @@ func Calculate(dimensions []int) int {
 
 	// Auxiliary table for storing m[i,j] costs
 	// m[i,j] = Minimum number of scalar multiplications needed to compute
-	// the matrix A[i]A[i+1]...A[j]. For example, m[1,4] = minimum cost for
-	// calculating matrix product A1A2A3A4
+	// the matrix A[i]A[i+1]...A[j].
+	// For example, m[1,4] = minimum cost for calculating matrix product A1A2A3A4.
 	// Note regarding approach to  allocating a 2D slice: One approach is to allocate
 	// each slice independently; the other is to allocate a single array and point the
 	// individual slices into it. If the slices might grow or shrink, they should be
