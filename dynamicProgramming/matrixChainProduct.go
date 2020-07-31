@@ -5,6 +5,7 @@ import "math"
 // This function assumes that matrix Ai has dimensions pi-1 x pi for i = 1,2, ..., n.
 // Input is an array of matrix dimensions: p0, p1, ..., pn. For example, if we have
 // three matrices A1 = 3x4, A2 = 4x5 and A3 = 5x6, then the input array is {3,4,5,6}
+//
 func Calculate(dimensions []int) int {
 	n := len(dimensions)
 
