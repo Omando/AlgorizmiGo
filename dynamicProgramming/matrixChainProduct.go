@@ -26,7 +26,7 @@ func Calculate(dimensions []int) int {
 	}
 
 	var j, min, q int
-	// Refer to RecursionDP document and note the colored squares to
+	// Refer to Dynamic Programming document and note the colored squares to
 	// explain the use of diff
 	for diff := 1; diff < n-1; diff++ {
 		for i := 1; i < n-diff; i++ {
