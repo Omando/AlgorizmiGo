@@ -68,3 +68,35 @@ func rollButStayAtK(k int) strategy {
 		return roll
 	}
 }
+
+func Play() (winnerNumber int) {
+	// Strategies for both players: Player 1 keeps on rolling, but holds on 50,
+	// while player 2 keeps on rolling but holds on 20
+	var p1Strategy = rollButStayAtK(50)
+	var p2Strategy = rollButStayAtK(20)
+	var strategies = []strategy{p1Strategy, p2Strategy}
+
+	var s scores
+	var turnIsOver bool
+
+	// Let player 1 start
+	var currentPlayer = 0
+
+	// Keep on playing while scores for both players are under the required win value
+	for s.player+s.thisTurn < win {
+
+		// Get strategy and actin for this player
+		var currentPlayerStrategy strategy = strategies[currentPlayer]
+		var currentPlayerAction action = currentPlayerStrategy(s)
+
+		// Roll the dice
+		s, turnIsOver = currentPlayerAction(s)
+
+		// Switch to the other player if turn is over, otherwise roll dice again
+		if turnIsOver {
+			currentPlayer = (currentPlayer + 1) % 2 // switch between 0 and 1
+		}
+	}
+
+	return currentPlayer // return which player won
+}
