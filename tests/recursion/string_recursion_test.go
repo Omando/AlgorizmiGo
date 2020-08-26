@@ -2,8 +2,8 @@ package recursion
 
 import (
 	"AlgorizmiGo/recursion"
-	"fmt"
 	"github.com/stretchr/testify/assert"
+	"sort"
 	"testing"
 )
 
@@ -46,9 +46,6 @@ func TestRemoveVowels(t *testing.T) {
 }
 
 func TestReverseString(t *testing.T) {
-	const myString = "\xbd\xb2\x3d\xbc\x20\xe2\x8c\x98"
-	fmt.Printf("%q\n", myString)
-
 	tests := []struct {
 		input  string
 		output string
@@ -65,3 +62,23 @@ func TestReverseString(t *testing.T) {
 		assert.Equal(t, test.output, actualOutput)
 	}
 }
+
+func TestAllStringCombinations(t *testing.T) {
+	tests := []struct {
+		input string
+		expectedCombinations []string
+	} {
+		{ input: "", expectedCombinations: []string{},},
+		{ input: "a", expectedCombinations: []string{"a"}},
+		{ input:"ab", expectedCombinations: []string{"b", "a", "ab"}},
+		{ input:"ab⌘", expectedCombinations: []string{"b", "a⌘", "a", "ab", "ab⌘", "b⌘", "⌘"}},
+	}
+
+	for _, test := range tests {
+		actualCombinations := recursion.AllStringCombinations(test.input)
+		sort.Strings(actualCombinations)
+		sort.Strings(test.expectedCombinations)
+		assert.Equal(t, test.expectedCombinations, actualCombinations)
+	}
+}
+
