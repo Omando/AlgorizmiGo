@@ -62,7 +62,7 @@ func ReverseString(s string) string {
 		return ""
 	}
 
-	// Convert string character array
+	// Convert string to a character array
 	chars := []byte(s)
 	doReverseString(chars, 0)
 
@@ -70,6 +70,8 @@ func ReverseString(s string) string {
 	return string(chars)
 }
 
+// chars slice is not passed as reference because code will work on the underlying
+// array and never append
 func doReverseString(chars []byte, index int) {
 	// Exit condition
 	if len(chars)/2 == index {
@@ -128,12 +130,35 @@ func doAllStringCombinations(runes []rune, combinationSet map[string]bool) {
 
 func InterleaveStrings(s1 string, s2 string) []string {
 
-	var interleaves []string
-	doInterleaveStrings(s1, s2, "", &interleaves)
+	var allInterleaves []string
 
-	return []string{}
+	// allInterleaves slice passed as a reference because it will be appended to
+	doInterleaveStrings([]rune(s1), []rune(s2), []rune{}, &allInterleaves)
+
+	return allInterleaves
 }
 
-func doInterleaveStrings(s1, s2 string, result string, interleaves *[]string) {
+// allInterleaves slice passed as a reference because it will be appended to and
+//the internal pointer will change
+func doInterleaveStrings(s1 []rune, s2 []rune, result []rune, interleaves *[]string) {
 
+	// Exit condition
+	if len(s1) == 0 && len(s2) == 0 {
+		*interleaves = append(*interleaves, string(result))
+		return
+	}
+
+	if len(s1) > 0 {
+		newResult := []rune(result)
+		newResult = append(newResult, s1[0])
+		doInterleaveStrings(s1[1:], s2, newResult, interleaves)
+	}
+
+	if len(s2) > 0 {
+		newResult := []rune(result)
+		newResult = append(newResult, s2[0])
+		doInterleaveStrings(s1, s2[1:], newResult, interleaves)
+	}
+
+	return
 }
