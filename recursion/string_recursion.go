@@ -88,7 +88,7 @@ func doReverseString(chars []byte, index int) {
 
 func AllStringCombinations(input string) []string {
 
-	var runes = []rune(input)		// Convert input string to an array of runes
+	var runes = []rune(input) // Convert input string to an array of runes
 	var combinationSet = make(map[string]bool)
 
 	doAllStringCombinations(runes, combinationSet)
@@ -96,7 +96,7 @@ func AllStringCombinations(input string) []string {
 	// Collect keys into a slice
 	var combinations []string = make([]string, len(combinationSet))
 	index := 0
-	for k,_ := range combinationSet {
+	for k, _ := range combinationSet {
 		combinations[index] = k
 		index++
 	}
@@ -122,7 +122,12 @@ func doAllStringCombinations(runes []rune, combinationSet map[string]bool) {
 		var tempRune []rune = make([]rune, len(runes))
 		copy(tempRune, runes)
 		tempRune = append(tempRune[:i], tempRune[i+1:]...)
-		doAllStringCombinations(tempRune, combinationSet);
+		doAllStringCombinations(tempRune, combinationSet)
 	}
 }
 
+func InterleaveStrings(s1 string, s2 string) []string {
+
+	// TODO
+	return []string{}
+}
