@@ -128,6 +128,12 @@ func doAllStringCombinations(runes []rune, combinationSet map[string]bool) {
 
 func InterleaveStrings(s1 string, s2 string) []string {
 
-	// TODO
+	var interleaves []string
+	doInterleaveStrings(s1, s2, "", &interleaves)
+
 	return []string{}
+}
+
+func doInterleaveStrings(s1, s2 string, result string, interleaves *[]string) {
+
 }
