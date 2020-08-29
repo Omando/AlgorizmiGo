@@ -151,14 +151,12 @@ func doInterleaveStrings(s1 []rune, s2 []rune, result []rune, interleaves *[]str
 	if len(s1) > 0 {
 		newResult := []rune(result)
 		newResult = append(newResult, s1[0])
-		doInterleaveStrings(s1[1:], s2, newResult, interleaves)
+		doInterleaveStrings(s1[1:], s2, newResult, interleaves) // Pass s1 substring starting from index 1
 	}
 
 	if len(s2) > 0 {
 		newResult := []rune(result)
 		newResult = append(newResult, s2[0])
-		doInterleaveStrings(s1, s2[1:], newResult, interleaves)
+		doInterleaveStrings(s1, s2[1:], newResult, interleaves) // Pass s2 substring starting from index 1
 	}
-
-	return
 }
