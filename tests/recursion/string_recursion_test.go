@@ -65,13 +65,13 @@ func TestReverseString(t *testing.T) {
 
 func TestAllStringCombinations(t *testing.T) {
 	tests := []struct {
-		input string
+		input                string
 		expectedCombinations []string
-	} {
-		{ input: "", expectedCombinations: []string{},},
-		{ input: "a", expectedCombinations: []string{"a"}},
-		{ input:"ab", expectedCombinations: []string{"b", "a", "ab"}},
-		{ input:"ab⌘", expectedCombinations: []string{"b", "a⌘", "a", "ab", "ab⌘", "b⌘", "⌘"}},
+	}{
+		{input: "", expectedCombinations: []string{}},
+		{input: "a", expectedCombinations: []string{"a"}},
+		{input: "ab", expectedCombinations: []string{"b", "a", "ab"}},
+		{input: "ab⌘", expectedCombinations: []string{"b", "a⌘", "a", "ab", "ab⌘", "b⌘", "⌘"}},
 	}
 
 	for _, test := range tests {
@@ -82,3 +82,21 @@ func TestAllStringCombinations(t *testing.T) {
 	}
 }
 
+func TestStringInterleaves(t *testing.T) {
+	tests := []struct {
+		s1                  string
+		s2                  string
+		expectedInterleaves []string
+	}{
+		{s1: "A", s2: "C", expectedInterleaves: []string{"AC", "CA"}},
+		{s1: "AB", s2: "C", expectedInterleaves: []string{"ABC", "ACB", "CAB"}},
+		{s1: "AB", s2: "CD", expectedInterleaves: []string{"ABCD", "ACBD", "ACDB", "CDAB", "CABD", "CADB"}},
+	}
+
+	for _, test := range tests {
+		actualInterleaves := recursion.InterleaveStrings(test.s1, test.s2)
+		sort.Strings(actualInterleaves)
+		sort.Strings(test.expectedInterleaves)
+		assert.Equal(t, test.expectedInterleaves, actualInterleaves)
+	}
+}
