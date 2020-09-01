@@ -170,6 +170,35 @@ func doInterleaveStrings(s1 []rune, s2 []rune, result []rune, interleaves *[]str
 /*  Given a sequence of numbers [2..9] from a dial keypad, print all possible combinations
 of letters: (2, ABC), (3,DEF), (4, GHI), (5, JKL), (6, MNO), (7, PQRS), (8, TUV), (9,WXYZ)
 */
-func combinationsFromDialKeypad(numbers []string) []string {
+func CombinationsFromDialKeypad(numbers []int) []string {
+	// Create a list of keypad combinations
+	keypadLetters := []string{"", "", "ABC", "DEF", "GHI", "JKL", "MNO", "PQRS", "TUV", "WXYZ"}
 
+	// Get letters corresponding to the given numbers
+	var inputCombinations []string
+	for _, number := range numbers {
+		letters := keypadLetters[number]
+		if letters == "" {
+			continue
+		}
+		inputCombinations = append(inputCombinations, letters)
+	}
+
+	var outputCombinations []string
+	doCombinationsFromDialKeypad(inputCombinations, 0, []byte{}, &outputCombinations)
+	return outputCombinations
+}
+
+func doCombinationsFromDialKeypad(inputCombinations []string, index int, outputWord []byte, outputCombinations *[]string) {
+	// Exit condition
+	if len(inputCombinations) == index {
+		*outputCombinations = append(*outputCombinations, string(outputWord))
+		return
+	}
+
+	var inputWord string = inputCombinations[index]
+	for i := 0; i < len(inputWord); i++ {
+		newOutputWord := append(outputWord, inputWord[i])
+		doCombinationsFromDialKeypad(inputCombinations, index+1, newOutputWord, outputCombinations)
+	}
 }
