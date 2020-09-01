@@ -4,7 +4,7 @@ import (
 	"strings"
 )
 
-// Counts how many times a given character appears in a given string
+/* Counts how many times a given character appears in a given string */
 func GetCharacterCount(s string, c byte) int {
 	if len(s) == 0 {
 		return 0
@@ -26,9 +26,10 @@ func doGetCharacterCount(s string, c byte, index int, runningCount int) int {
 	return doGetCharacterCount(s, c, index+1, runningCount)
 }
 
-// Returns a new string with all vowels removed. The original string is unchanged
-// While this code iterates the string from left to right, another approach worth
-// looking at is iterating over the string from both sides
+/* Returns a new string with all vowels removed. The original string is unchanged
+While this code iterates the string from left to right, another approach worth
+looking at is iterating over the string from both sides
+*/
 func RemoveVowels(s string) string {
 
 	// Pass address of string.Builder to avoid copying string builder
@@ -56,7 +57,7 @@ func doRemoveVowels(s string, index int, builder *strings.Builder) string {
 	return doRemoveVowels(s, index+1, builder)
 }
 
-// Return a reversed string
+/*  Return a reversed string */
 func ReverseString(s string) string {
 	if len(s) == 0 {
 		return ""
@@ -88,6 +89,8 @@ func doReverseString(chars []byte, index int) {
 	doReverseString(chars, index+1)
 }
 
+/* Given a string, return all possible combinations. For example, given "abc", all possible
+character combinations are: "a", "ab", "abc", "ac", "b", "bc", and "c"  */
 func AllStringCombinations(input string) []string {
 
 	var runes = []rune(input) // Convert input string to an array of runes
@@ -128,6 +131,9 @@ func doAllStringCombinations(runes []rune, combinationSet map[string]bool) {
 	}
 }
 
+/* Given two strings, find all interleaves that can be formed from the characters of
+the two strings where order of characters is preserved. For example, given AB and AC,
+the possible interleaves are: ABAC, AACB, AABC, ACAB, AABC, AACB */
 func InterleaveStrings(s1 string, s2 string) []string {
 
 	var allInterleaves []string
@@ -159,4 +165,11 @@ func doInterleaveStrings(s1 []rune, s2 []rune, result []rune, interleaves *[]str
 		newResult = append(newResult, s2[0])
 		doInterleaveStrings(s1, s2[1:], newResult, interleaves) // Pass s2 substring starting from index 1
 	}
+}
+
+/*  Given a sequence of numbers [2..9] from a dial keypad, print all possible combinations
+of letters: (2, ABC), (3,DEF), (4, GHI), (5, JKL), (6, MNO), (7, PQRS), (8, TUV), (9,WXYZ)
+*/
+func combinationsFromDialKeypad(numbers []string) []string {
+
 }
