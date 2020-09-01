@@ -100,3 +100,23 @@ func TestStringInterleaves(t *testing.T) {
 		assert.Equal(t, test.expectedInterleaves, actualInterleaves)
 	}
 }
+
+func TestCombinationsFromKeyPad(t *testing.T) {
+	tests := []struct {
+		numbers              []int
+		expectedCombinations []string
+	}{
+		{numbers: []int{1}, expectedCombinations: []string{""}},
+		{numbers: []int{1, 2}, expectedCombinations: []string{"A", "B", "C"}},
+		{numbers: []int{2, 3}, expectedCombinations: []string{"AD", "AE", "AF", "BD", "BE", "BF", "CD", "CE", "CF"}},
+		{numbers: []int{2, 3, 4}, expectedCombinations: []string{
+			"ADG", "ADH", "ADI", "AEG", "AEH", "AEI", "AFG", "AFH", "AFI",
+			"BDG", "BDH", "BDI", "BEG", "BEH", "BEI", "BFG", "BFH", "BFI",
+			"CDG", "CDH", "CDI", "CEG", "CEH", "CEI", "CFG", "CFH", "CFI"}},
+	}
+
+	for _, test := range tests {
+		actualCombinations := recursion.CombinationsFromDialKeypad(test.numbers)
+		assert.Equal(t, test.expectedCombinations, actualCombinations)
+	}
+}
