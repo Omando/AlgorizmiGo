@@ -15,11 +15,10 @@ func doSubSetSum(input []int, targetSum int, index int, currentSum int) bool {
 		return false
 	}
 
-	var hasTargetSum = doSubSetSum(input, targetSum, index + 1, currentSum + input[index])
+	var hasTargetSum = doSubSetSum(input, targetSum, index+1, currentSum+input[index])
 	if hasTargetSum == false {
-		hasTargetSum = doSubSetSum(input, targetSum, index + 1, currentSum )
+		hasTargetSum = doSubSetSum(input, targetSum, index+1, currentSum)
 	}
 
 	return hasTargetSum
 }
-
