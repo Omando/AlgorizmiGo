@@ -11,6 +11,7 @@ func TestStringPermutations(t *testing.T) {
 		input                string
 		expectedPermutations []string
 	}{
+		{input: "a", expectedPermutations: []string{"a"}},
 		{input: "ab", expectedPermutations: []string{"ab", "ba"}},
 		{input: "abc", expectedPermutations: []string{"abc", "acb", "bca", "bac", "cab", "cba"}},
 		{input: "يزن", expectedPermutations: []string{"يزن", "ينز", "زني", "زين", "نيز", "نزي"}},
