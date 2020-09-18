@@ -50,7 +50,6 @@ func TestSubset(t *testing.T) {
 		{"abc", []string{"a","b", "c", "ab", "ac", "bc", "abc"}},
 		{"يس", []string{"س","ي", "يس"}},
 	}
-
 	for _, test := range tests {
 		actualSubset := recursion.Subset(test.input)
 		assert.ElementsMatch(t, test.expectedSubsets, actualSubset)
