@@ -48,6 +48,7 @@ func TestSubset(t *testing.T) {
 	}{
 		{"ab", []string{"a", "b", "ab"}},
 		{"abc", []string{"a","b", "c", "ab", "ac", "bc", "abc"}},
+		{"يس", []string{"س","ي", "يس"}},
 	}
 
 	for _, test := range tests {
