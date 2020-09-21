@@ -29,7 +29,7 @@ func Subset(input string) []string {
 	var subsets []string
 	var item []rune
 
-	doSubset(inputAsRunes, 0, item, &subsets )
+	doSubset(inputAsRunes, 0, item, &subsets)
 
 	return subsets
 }
@@ -43,9 +43,9 @@ func doSubset(input []rune, index int, item []rune, subsets *[]string) {
 	newItem := append(item, input[index])
 	*subsets = append(*subsets, string(newItem))
 
-	// Branch 1: Include item at index
+	// Branch 1: Include item at current index
 	doSubset(input, index+1, newItem, subsets)
 
-	// Branch 1: Exclude item at index
+	// Branch 1: Exclude item at current index
 	doSubset(input, index+1, item, subsets)
 }
