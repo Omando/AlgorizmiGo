@@ -15,3 +15,8 @@ func Sudoku(grid [][]int) [][]int {
 
 	return result
 }
+
+func canAddItem(grid [][]int, row int, column int, misisngNumber int) bool {
+	// todo
+	return false
+}
