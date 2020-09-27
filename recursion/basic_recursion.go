@@ -116,3 +116,26 @@ func doReverseIteration(index int, end int, funcDecrementer incrementer) {
 	fmt.Println("Processing index ", index)
 	doForwardIteration(funcDecrementer(index), end, funcDecrementer)
 }
+
+func GridIterationViaRecursion(grid [][]int) [][]int {
+	var result [][]int = make([][]int, len(grid))
+	for i := range grid {
+		result[i] = make([]int, len(grid[0]))
+	}
+	return doGridIterationViaRecusion(grid, 0, 0, result)
+}
+
+func doGridIterationViaRecusion(grid [][]int, row int, col int, result [][]int) [][]int {
+	// If we reached last row, move to the next column and start from the first row
+	// Exit if we reached the last column
+	if row == len(grid) {
+		row = 0;
+		col = col + 1
+		if col == len(grid[0]) {
+			return result
+		}
+	}
+
+	result[row][col] = grid[row][col]
+	return doGridIterationViaRecusion(grid, row + 1, col, result)
+}
