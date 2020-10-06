@@ -19,4 +19,17 @@ func (m Movement) String() string {
 	return [...]string{"None", "Left", "Right", "Top", "Down"}[m]
 }
 
+func findPath(grid [][]int, entryPoint Point, exitPoint Point) (bool, []Point) {
+	// Add necessary checks to ensure that entry and exit points are within
+	// the given grid (omitted for brevity)
+	// ...
+
+	var path []Point
+	hasSolution := solvePath(grid, entryPoint, exitPoint, &path);
+	return hasSolution, path
+}
+
+func solvePath(grid [][]int, currentPoint Point, exitPoint Point, path *[]Point) bool {
+
+}
 
