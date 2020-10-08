@@ -48,9 +48,13 @@ func updateCurrentPoint(movement Movement, currentPoint Point) {
 
 func resetPathPoint(movement Movement, currentPoint Point) {
 	switch movement {
-		case LEFT: currentPoint.x++
-		case RIGHT: currentPoint.x--
-		case TOP: currentPoint.y++
-		case DOWN: currentPoint.y--
+		case LEFT:
+			currentPoint.x++
+		case RIGHT:
+			currentPoint.x--
+		case TOP:
+			currentPoint.y++
+		case DOWN:
+			currentPoint.y--
 	}
 }
