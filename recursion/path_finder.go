@@ -33,6 +33,28 @@ func solvePath(grid [][]int, currentPoint Point, exitPoint Point, path *[]Point)
 
 }
 
+// Can only move left, top, up and down. No diagonal movement
+func getMovements(grid [][]int, currentPoint Point) []Movement {
+	var movements []Movement
+	if currentPoint.y+1 < len(grid) && grid[currentPoint.y + 1][currentPoint.x] == 1 {
+		movements = append(movements, DOWN);
+	}
+	if currentPoint.y-1 >= 0 && grid[currentPoint.y - 1][currentPoint.x] == 1 {
+		movements = append(movements, TOP);
+	}
+	if currentPoint.x-1 >= 0 && grid[currentPoint.y][currentPoint.x - 1] == 1 {
+		movements = append(movements, LEFT);
+	}
+	if currentPoint.x+1 < len(grid[0]) && grid[currentPoint.y][currentPoint.x + 1] == 1 {
+		movements = append(movements, RIGHT);
+	}
+	if len(movements) == 0 {
+		movements = append(movements, NONE);
+	}
+
+	return movements;
+}
+
 func updateCurrentPoint(movement Movement, currentPoint Point) {
 	switch movement {
 		case LEFT:
