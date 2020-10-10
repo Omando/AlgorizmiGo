@@ -29,8 +29,34 @@ func findPath(grid [][]int, entryPoint Point, exitPoint Point) (bool, []Point) {
 	return hasSolution, path
 }
 
+// Recall, pass a pointer to any slice you want to modify inside a function
 func solvePath(grid [][]int, currentPoint Point, exitPoint Point, path *[]Point) bool {
+	// Exit condition
+	if currentPoint.x == exitPoint.x && currentPoint.y == exitPoint.y {
+		*path = append(*path, currentPoint)
+		return true;
+	}
 
+	// Get list of all possible movements from the current location
+	movements := getMovements(grid, currentPoint);
+
+	// Back track if we cannot move
+	if len(movements) == 1 && movements[0] == NONE {
+		return false;
+	}
+
+	// We can move: consider all possible moves from this point
+	var moveSuccessful bool
+	for _, movement := range movements {
+		// Create a new point to add to/remove from path
+		pathPoint := Point{currentPoint.x, currentPoint.y}
+		*path = append(*path, pathPoint)
+
+		// todo
+	}
+
+	// Cannot move anywhere so back track
+	return false;
 }
 
 // Can only move left, top, up and down. No diagonal movement
@@ -68,7 +94,7 @@ func updateCurrentPoint(movement Movement, currentPoint Point) {
 	}
 }
 
-func resetPathPoint(movement Movement, currentPoint Point) {
+func resetCurrentPoint(movement Movement, currentPoint Point) {
 	switch movement {
 		case LEFT:
 			currentPoint.x++
