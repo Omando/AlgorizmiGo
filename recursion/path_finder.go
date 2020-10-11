@@ -52,7 +52,14 @@ func solvePath(grid [][]int, currentPoint Point, exitPoint Point, path *[]Point)
 		pathPoint := Point{currentPoint.x, currentPoint.y}
 		*path = append(*path, pathPoint)
 
-		// todo
+		grid[currentPoint.y][currentPoint.x] = 2;       // Current point has been visited
+		updateCurrentPoint(movement, currentPoint);
+		moveSuccessful = solvePath(grid, currentPoint, exitPoint, path);
+		if moveSuccessful {
+			return true
+		} else {
+			// todo
+		}
 	}
 
 	// Cannot move anywhere so back track
