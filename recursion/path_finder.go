@@ -62,7 +62,11 @@ func solvePath(grid [][]int, currentPoint Point, exitPoint Point, path *[]Point)
 			grid[currentPoint.y][currentPoint.x] = 1 // un-visited. SHOULD COME BEFORE?
 			var newLength = len(*path) - 1
 			*path = (*path)[:newLength]
-			return false
+
+			// Adding a return false will unwind all the way to the beginning.
+			// We do not want that, instead, we want to try the next available
+			// movement. If no moves are available, then we return false
+			// return false         // Uncommenting this line is wrong!
 		}
 	}
 
