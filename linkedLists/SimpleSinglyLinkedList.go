@@ -1,8 +1,8 @@
 package linkedLists
 
 type Node struct {
-	value int
-	next *Node	// Must use pointer for recursive types. Otherwise size of struct is unknown to compiler
+	Value int
+	Next *Node	// Must use pointer for recursive types. Otherwise size of struct is unknown to compiler
 }
 
 // Recall that the zero value of a struct is a struct with all fields set to
@@ -14,7 +14,7 @@ type SimpleSinglyLinkedList struct {
 }
 
 func (linkedList SimpleSinglyLinkedList) append(data int) {
-	newNode := &Node{value: data, next: nil}
+	newNode := &Node{data, nil}
 	// Head and tail point to the same node if the list is empty
 	if linkedList.head == nil {
 		linkedList.head = newNode
@@ -22,6 +22,6 @@ func (linkedList SimpleSinglyLinkedList) append(data int) {
 	}
 
 	// List is already populated. Append a new node to the end
-	linkedList.tail.next = newNode
+	linkedList.tail.Next = newNode
 	linkedList.tail = newNode
 }
