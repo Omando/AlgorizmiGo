@@ -6,27 +6,29 @@ type Node struct {
 }
 
 // Recall that the zero value of a struct is a struct with all fields set to
-// their own zero values. This means a struct cannot be compared to nil
+// their own zero values. This means a struct cannot be compared to nil.
 // To allow comparison with nil, we declare head and tail struct as pointers
 type SimpleSinglyLinkedList struct {
 	head *Node
 	tail *Node
 }
 
-func (ll SimpleSinglyLinkedList) Head() *Node {
+// Recall: A non-pointer receiver does not show changes to the receiver outside the function
+func (ll *SimpleSinglyLinkedList) Head() *Node {
 	return ll.head
 }
 
-func (linkedList SimpleSinglyLinkedList) Append(data int) {
+// Recall: A non-pointer receiver does not show changes to the receiver outside the function
+func (ll *SimpleSinglyLinkedList) Append(data int) {
 	newNode := &Node{data, nil}
 	// Head and tail point to the same node if the list is empty
-	if linkedList.head == nil {
-		linkedList.head = newNode
-		linkedList.tail = linkedList.head
+	if ll.head == nil {
+		ll.head = newNode
+		ll.tail = ll.head
 		return
 	}
 
 	// List is already populated. Append a new node to the end
-	linkedList.tail.Next = newNode
-	linkedList.tail = newNode
+	ll.tail.Next = newNode
+	ll.tail = newNode
 }
