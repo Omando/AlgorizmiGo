@@ -22,6 +22,8 @@ func TestSwappingLinkedListNodes(t *testing.T) {
 		currentActualNode := actualSwappedLinkedList
 		for currentExpectedNode.Next != nil && currentActualNode != nil {
 			assert.EqualValues(t, currentExpectedNode.Value, currentActualNode.Value)
+			currentExpectedNode = currentExpectedNode.Next
+			currentActualNode = currentActualNode.Next
 		}
 	}
 }
