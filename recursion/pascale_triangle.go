@@ -23,7 +23,7 @@ func solvePascal (rowIndex int, rows [][]int) {
 
 	// Populate current row from previous row
 	for i := 0; i < currentRowLength; i++ {
-		// Left and right edges of current row are 1
+		// Left and right edges of current row are always 1
 		if i == 0 || i == currentRowLength - 1 {
 			rows[rowIndex][i] = 1
 		} else {
