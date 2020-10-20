@@ -22,5 +22,13 @@ func solvePascal (rowIndex int, rows [][]int) {
 	rows[rowIndex] = make([]int, currentRowLength)
 
 	// Populate current row from previous row
-	// todo...
+	for i := 0; i < currentRowLength; i++ {
+		// Left and right edges of current row are 1
+		if i == 0 || i == currentRowLength - 1 {
+			rows[rowIndex][i] = 1
+		} else {
+			// Inner cells of current row
+			rows[rowIndex][i] = rows[rowIndex-1][i-1] + rows[rowIndex-1][i]
+		}
+	}
 }
