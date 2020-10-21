@@ -1,10 +1,7 @@
 package recursion
 
 func GeneratePascalTriangle(n int) [][]int {
-	var rows [][]int = make([][]int, n)
-	for i := range rows {
-		rows[i] = make([]int, 0)
-	}
+	var rows [][]int = make([][]int, n+1)
 	solvePascal(n, rows)
 	return rows
 }
@@ -12,7 +9,9 @@ func GeneratePascalTriangle(n int) [][]int {
 func solvePascal(rowIndex int, rows [][]int) {
 	// Exit condition: Add first row
 	if rowIndex == 0 {
-		rows[0] = append(rows[0], 1)
+		// Allocate the base array and set the first and only element to 1
+		rows[0] = make([]int, 1)
+		rows[0][0] = 1
 		return
 	}
 
