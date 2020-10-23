@@ -23,5 +23,6 @@ func solveClimbStairs(stepsCount int, currentStep int) int {
 	oneStepCount := solveClimbStairs(stepsCount, currentStep+1);
 	twoStepCount := solveClimbStairs(stepsCount, currentStep+2);
 
+	// Total successful count for both branches
 	return oneStepCount + twoStepCount;
 }
