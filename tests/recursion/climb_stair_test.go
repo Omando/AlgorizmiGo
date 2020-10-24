@@ -17,6 +17,7 @@ func TestClimbStairs(t *testing.T) {
 		{4, 5, },
 		{5, 8, },
 		{6, 13, },
+		{7, 21, },
 	}
 	for _, test := range tests {
 		actualCountOfWays := recursion.ClimbStairs(test.stepsCount)
