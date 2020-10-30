@@ -2,12 +2,11 @@ package dynamicProgamming
 
 import (
 	"AlgorizmiGo/dynamicProgramming"
-	"fmt"
+	"github.com/stretchr/testify/assert"
 	"testing"
 )
 
 func should_calcualte_optimal_costs_and_roots(t *testing.T) {
-
 	tests := []struct {
 		name string
 		keys []byte
@@ -36,9 +35,9 @@ func should_calcualte_optimal_costs_and_roots(t *testing.T) {
 		},
 	}
 	for _, test := range tests {
-		t.Run(test.name, func(t *testing.T) {
-			costs, roots := dynamicProgramming.FindOptimalBST(test.keys, test.frequencies)
-			fmt.Println(costs, roots);
-		})
+		costs, roots, err := dynamicProgramming.FindOptimalBST(test.keys, test.frequencies)
+		assert.NotNil(t,err)
+		assert.EqualValues(t, costs, test.expectedCosts)
+		assert.EqualValues(t, roots, test.expectedRoots)
 	}
 }
