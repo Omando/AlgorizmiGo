@@ -19,10 +19,10 @@ func FindOptimalBST(keys []byte, freq []int) (costs [][]int, roots [][]int, err 
 
 	// Pre populate costs and roots tables
 	for i := 0; i < length; i++ {
-		costs[i][i] = freq[i]
-		roots[i][i] = i
+		costs[i][i] = freq[i]	// populate diagonal data
+		roots[i][i] = i			// populate diagonal data
  	}
- 	
+
 
 
 
