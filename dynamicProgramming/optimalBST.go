@@ -23,11 +23,19 @@ func FindOptimalBST(keys []byte, freq []int) (costs [][]int, roots [][]int, err 
 		roots[i][i] = i			// populate diagonal data
  	}
 
+	// Calculate optimal costs (diagonally, see background colors in document)
+	offset := 1
+	for offset < length {
+		i := 0;
 
+		//  i <= r <= j
+		for j := offset; j < length; j++ {
+			// todo
+		}
 
-
-
-
+		offset++;   // Increase column offset for next diagonal
+	}
+	
 	// todo
 	return costs, roots, nil
 }
