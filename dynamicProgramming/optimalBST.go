@@ -1,6 +1,9 @@
 package dynamicProgramming
 
-import "errors"
+import (
+	"errors"
+	"math"
+)
 
 func FindOptimalBST(keys []byte, freq []int) (costs [][]int, roots [][]int, err error) {
 	// keys and freq table should bath have the same length
@@ -30,12 +33,22 @@ func FindOptimalBST(keys []byte, freq []int) (costs [][]int, roots [][]int, err 
 
 		//  i <= r <= j
 		for j := offset; j < length; j++ {
-			// todo
+			// Reset variables
+			min := 1 << 31- 1		// max int 32
+			root := i
+			freqSum := 0
+
+			// Calculate cost(i,j) from recurrence formula
+
+			// Update dynamic tables
+
+			// next row
+			i++
 		}
 
 		offset++;   // Increase column offset for next diagonal
 	}
-	
+
 	// todo
 	return costs, roots, nil
 }
