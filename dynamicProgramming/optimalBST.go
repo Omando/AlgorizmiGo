@@ -41,6 +41,8 @@ func FindOptimalBST(keys []byte, freq []int) (costs [][]int, roots [][]int, err 
 			// Calculate cost(i,j) from recurrence formula
 
 			// Update dynamic tables
+			costs[i][j] = min + freqSum;
+			roots[i][j] = root;
 
 			// next row
 			i++
