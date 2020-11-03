@@ -50,7 +50,10 @@ func FindOptimalBST(keys []byte, freq []int) (costs [][]int, roots [][]int, err 
 					bottomcost =  costs[r+1][j]
 				}
 				cost := leftcost + bottomcost
-				
+				if (cost < min) {
+					min = cost;
+					root = r;
+				}
 			}
 
 			// Update dynamic tables
