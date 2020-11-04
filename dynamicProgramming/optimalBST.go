@@ -2,7 +2,6 @@ package dynamicProgramming
 
 import (
 	"errors"
-	"math"
 )
 
 func FindOptimalBST(keys []byte, freq []int) (costs [][]int, roots [][]int, err error) {
@@ -13,8 +12,8 @@ func FindOptimalBST(keys []byte, freq []int) (costs [][]int, roots [][]int, err 
 
 	// Allocate one programming table for optimal costs, and another for optimal root nodes
 	length :=  len(keys)
-	var costs [][]int = make([][]int, length)
-	var roots [][]int = make([][]int, length)
+	costs = make([][]int, length)
+	roots = make([][]int, length)
 	for i := range keys {
 		costs[i] = make([]int, length)
 		roots[i] = make([]int, length)
@@ -67,6 +66,5 @@ func FindOptimalBST(keys []byte, freq []int) (costs [][]int, roots [][]int, err 
 		offset++;   // Increase column offset for next diagonal
 	}
 
-	// todo
 	return costs, roots, nil
 }
