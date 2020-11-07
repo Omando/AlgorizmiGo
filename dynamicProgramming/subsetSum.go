@@ -2,7 +2,7 @@ package dynamicProgramming
 
 import "errors"
 
-func subsetSum(a []int, B int) ([]int, error) {
+func SubsetSum(a []int, B int) ([]int, error) {
 	if a == nil || len(a) == 0 || B <=0 {
 		return nil, errors.New("invalid parameters")
 	}
