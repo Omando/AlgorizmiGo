@@ -42,5 +42,21 @@ func subsetSum(a []int, B int) ([]int, error) {
 		}
 	}
 
+	// Finding the actual values required to make the given sum
+	var subset []int
+	column := B;
+	for i := len(a); i >= 1; i-- {
+		if grid[i][column] == grid[i-1][column] {
+			continue;
+		}
 
+		// Current cell different from upper cell so include number
+		subset = append(subset, a[i-1])		// array is 1-based
+
+		// column (or sum) contributed to value so subtract it and repeat
+		column = column - a[i-1];            //  sum = sum - current element
+	}
+
+	// No easy way to convert List<Integer> to int[]
+	return subset, nil
 }
