@@ -17,6 +17,11 @@ func Test_should_calcualte_subset_for_given_sum(t *testing.T) {
 			sum:            5,
 			expectedSubset: []int{4, 1},
 		},
+		{
+			input:          []int{2, 4, 6, 7, 8, 4, 10, 5, 24, 12},
+			sum:            35,
+			expectedSubset: []int{10, 8, 7, 6, 4},
+		},
 	}
 
 	for _, test := range tests {
