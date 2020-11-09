@@ -6,7 +6,7 @@ import (
 	"testing"
 )
 
-func Test_should_calcualte_binary_sequence_size(t *testing.T) {
+func Test_should_calculate_binary_sequence_size(t *testing.T) {
 	tests := []struct {
 		n            int
 		expectedSize int
