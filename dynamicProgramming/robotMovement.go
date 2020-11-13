@@ -2,7 +2,7 @@ package dynamicProgramming
 
 import "errors"
 
-func CalculateMovement(n int) (int, error) {
+func CalculateRobotMovementInGrid(n int) (int, error) {
 	// Check invariants
 	if n < 1 {
 		return 0, errors.New("n must be >= 1")
@@ -19,6 +19,7 @@ func CalculateMovement(n int) (int, error) {
 	}
 
 	// Calculation. Fill table according to recurrence relation T[x][y] = T[x-1][y] + T[x][y-1]
+	// Can either move right or down
 	for x := 1; x < n; x++ {
 		for y:= 1; y < n; y++ {
 			grid[x][y] = grid[x-1][y] + grid[x][y-1];
