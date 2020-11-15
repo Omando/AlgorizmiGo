@@ -17,4 +17,10 @@ func Test_should_calculate_grid_robot_movement(t *testing.T) {
 		{n: 4, expectedCount: 20},
 		{n: 5, expectedCount: 70},
 	}
+
+	for _, test := range tests {
+		actualCount, err := dynamicProgramming.CalculateRobotMovementInGrid(test.n)
+		assert.Nil(t, err)
+		assert.Equal(t, test.expectedCount, actualCount)
+	}
 }
