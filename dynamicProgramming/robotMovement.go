@@ -26,6 +26,6 @@ func CalculateRobotMovementInGrid(n int) (int, error) {
 		}
 	}
 
-	// Return result
+	// Return count of possible moves
 	return grid[n-1][n-1], nil
 }
