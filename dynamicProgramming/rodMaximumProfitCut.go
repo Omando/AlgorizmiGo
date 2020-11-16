@@ -2,6 +2,20 @@ package dynamicProgramming
 
 import "math"
 
+func RodMaximumProfitCut_Recursive(cutPrices []int, currentLength int) int {
+	// We assume that the current length has the maximum price
+	currentMaxPrice := cutPrices[currentLength];
+
+	// Iterate over remaining cuts
+	for reducedLength := currentLength - 1; reducedLength >= 1 ; reducedLength-- {
+		maxPriceForReducedLength := RodMaximumProfitCut_Recursive(cutPrices, reducedLength);
+		totalPrice := maxPriceForReducedLength + cutPrices[currentLength - reducedLength];
+		currentMaxPrice = int(math.Max(float64(currentMaxPrice), float64(totalPrice)));
+	}
+	return currentMaxPrice;
+
+}
+
 func RodMaximumProfitCut(prices []int, rodLength int) int {
 	// No cut is possible if original rod length is zero
 	if rodLength == 0 {
@@ -25,3 +39,5 @@ func RodMaximumProfitCut(prices []int, rodLength int) int {
 
 	return subProblems[rodLength]
 }
+
+
