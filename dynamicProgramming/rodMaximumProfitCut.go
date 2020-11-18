@@ -2,7 +2,13 @@ package dynamicProgramming
 
 import "math"
 
+// Recursion
 func RodMaximumProfitCut_Recursive(cutPrices []int, currentLength int) int {
+	// No cut is possible if original rod length is zero
+	if currentLength == 0 {
+		return 0
+	}
+
 	// We assume that the current length has the maximum price
 	currentMaxPrice := cutPrices[currentLength];
 
@@ -13,9 +19,9 @@ func RodMaximumProfitCut_Recursive(cutPrices []int, currentLength int) int {
 		currentMaxPrice = int(math.Max(float64(currentMaxPrice), float64(totalPrice)));
 	}
 	return currentMaxPrice;
-
 }
 
+// Dynamic programming - 1D
 func RodMaximumProfitCut(prices []int, rodLength int) int {
 	// No cut is possible if original rod length is zero
 	if rodLength == 0 {
@@ -39,5 +45,31 @@ func RodMaximumProfitCut(prices []int, rodLength int) int {
 
 	return subProblems[rodLength]
 }
+
+// Dynamic programming - 2D
+func RodMaximumProfitCutDP(prices []int, rodLength int) int {
+	// No cut is possible if original rod length is zero
+	if rodLength == 0 {
+		return 0;
+	}
+
+	// Initialize dynamic programming table
+	var grid [][]int  = make([][]int, rodLength+1);
+	for i := range grid {
+		grid[i] = make([]int, rodLength+1)
+	}
+
+	// Base conditions
+	for i := 1; i <= rodLength; i++ {
+		grid[1][i] = i * prices[1];
+		grid[i][1] = prices[1];
+	}
+
+	// TODO
+	//...
+	return grid[rodLength][rodLength];
+}
+
+
 
 
