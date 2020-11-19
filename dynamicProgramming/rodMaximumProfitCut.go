@@ -65,8 +65,17 @@ func RodMaximumProfitCutDP(prices []int, rodLength int) int {
 		grid[i][1] = prices[1];
 	}
 
-	// TODO
-	//...
+	for cut := 2; cut <= rodLength; cut++ {
+		for length := 2; length <= rodLength; length++ {
+			if cut > length {
+				grid[cut][length] = grid[cut-1][length];
+			} else {
+				totalPrice := prices[cut] + grid[cut][length - cut];
+				grid[cut][length] = int(math.Max(float64(totalPrice), float64(grid[cut - 1][length])));
+			}
+		}
+	}
+
 	return grid[rodLength][rodLength];
 }
 
