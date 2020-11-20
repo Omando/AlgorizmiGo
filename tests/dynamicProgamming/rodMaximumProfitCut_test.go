@@ -20,8 +20,14 @@ func TestRodMaximumProfitCut(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+			// Test recursive
 			if got := dynamicProgramming.RodMaximumProfitCut_Recursive(tt.prices, tt.rodLength); got != tt.want {
-				t.Errorf("RodMaximumProfitCut() = %v, want %v", got, tt.want)
+				t.Errorf("RodMaximumProfitCut_Recursive() = %v, want %v", got, tt.want)
+			}
+
+			// Test DP
+			if got := dynamicProgramming.RodMaximumProfitCutDP(tt.prices, tt.rodLength); got != tt.want {
+				t.Errorf("RodMaximumProfitCutDP() = %v, want %v", got, tt.want)
 			}
 		})
 	}
