@@ -9,6 +9,17 @@ import "math"
 //  A2 = 4x5
 //  A3 = 5x6
 func Calculate(dims []int) int {
+	n := len(dims)
+
+	// Auxiliary table for storing c[i,k] costs
+	// c[i,k] = Minimum number of scalar multiplications needed to compute the matrix
+	// A[i]A[i+1]...A[k]. For example, m[1,4] is minimum cost for calculating matrix
+	// product A1A2A3A4. Because the table is initialized to zeros, base conditions
+	// are also initialized (grid[i][i] = 0)
+	// Recall that if dim.length is n then there are n-1 matrices
+	var C [][]int = make([][]int, n)
+	var allCells []int = make([]int, n*n)
+
 
 }
 
