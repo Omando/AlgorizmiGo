@@ -1,5 +1,7 @@
 package dynamicProgramming
 
+import "math"
+
 // This function assumes that matrix Ai has dimensions pi-1 x pi for i = 1,2, ..., n.
 // Input is an array of matrix dimensions: p0, p1, ..., pn. For example, an input array
 // of size 4 such as {3,4,5,6} mean we have 3 matrices as follows:
@@ -28,11 +30,22 @@ func Calculate(dims []int) int {
 
 	// C(i,k)= C(i,j) + C(j+1,k) + RiCjCk
 	for i := 1; i < n; i++ {       // We ignore row 0 and column 0
+		offset := 1;
 		//C(1,2) = C(1,1) + C(2,2) + r1c1c2
 		//C(2,3) = C(2,2) + C(3,3) + r2c2c3
 		//C(3,4) = C(3,3) + C(4,4) + r3c3c4
 		//C(1,3) = min(C(1,1) + C(2,3) + r1c1c3, C(1,2) + C(3,3) + r1c2c3)
-
+		for k := i+1; k < n; k++ {
+			minCost := math.MaxInt32
+			for j := offset; j < k; j++ {
+				cost := C[offset][j] + C[j+1][k] + dims[offset-1]*dims[j]*dims[k];
+				if cost < minCost {
+					minCost = cost
+				}
+			}
+			C[offset][k] = minCost;
+			offset++;
+		}
 	}
 	return C[1][n-1];       // we ignore row 0 and col 0
 }
