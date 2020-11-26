@@ -17,6 +17,7 @@ func TestCalculate(t *testing.T) {
 	}{
 		{name: "4 matrices", input: args{[]int{5, 4, 6, 2, 7}}, want: 158},
 		{name: "5 matrices", input: args{[]int{10, 20, 30, 40, 30}}, want: 30000},
+		{name: "5 matrices", input: args{[]int {4,10,3,12,20,7,6,20,13}}, want: 2682},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
