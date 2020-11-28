@@ -15,7 +15,7 @@ func TestCalculate(t *testing.T) {
 		input args
 		want  int
 	}{
-		
+		{name: "2 matrices", input: args{[]int{5, 4, 6}}, want: 120},
 		{name: "3 matrices", input: args{[]int{5, 4, 6, 2}}, want: 88},
 		{name: "4 matrices", input: args{[]int{5, 4, 6, 2, 7}}, want: 158},
 		{name: "5 matrices", input: args{[]int{10, 20, 30, 40, 30}}, want: 30000},
