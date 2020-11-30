@@ -28,7 +28,6 @@ func runConsumer(resultsChannel chan int, feedbackChannel chan string, valueCoun
 	// Schedule the call to WaitGroup's Done to tell goroutine is completed.
 	defer wg.Done()
 
-
 }
 
 // Produce values until told to stop
@@ -36,7 +35,19 @@ func runProducer(resultsChannel chan int, feedbackChannel chan string, valueGene
 	// Schedule the call to WaitGroup's Done to tell goroutine is completed.
 	defer wg.Done()
 
-
+	value := valueGenerator(0)
+	for {			// while loop
+		select {
+			case resultsChannel <- value:
+				value = valueGenerator(value)			// Generate next value
+			case  feedback := <- feedbackChannel:
+				if feedback == "quit" {
+					close(feedbackChannel)
+					close(resultsChannel)
+					return
+				}
+		}
+	}
 }
 
 func GenerateIncrementalValues(previousValue int) int {
