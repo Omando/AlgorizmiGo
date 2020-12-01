@@ -36,3 +36,19 @@ func Test_should_receive_until_closed(t *testing.T) {
 		assert.EqualValues(t, test.expectedSum, actualSum)
 	}
 }
+
+func Test_produce_and_consumer_values(t *testing.T) {
+	tests := []struct {
+		valueCount 		int
+		generator		concurrency_basics.ValueGenerator
+		expectedOutput	[]int
+	} {
+		{5,  concurrency_basics.GenerateIncrementalValues,[]int{1,2,3,4,5}},
+		{7,  concurrency_basics.GenerateIncrementalValues,[]int{1,2,3,4,5,6,7}},
+	}
+
+	for _, test := range tests {
+		actualOutput := concurrency_basics.BasicProducerConsumer(test.generator, test.valueCount)
+		assert.EqualValues(t, test.expectedOutput, actualOutput)
+	}
+}
