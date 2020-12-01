@@ -28,6 +28,14 @@ func runConsumer(resultsChannel chan int, feedbackChannel chan string, valueCoun
 	// Schedule the call to WaitGroup's Done to tell goroutine is completed.
 	defer wg.Done()
 
+	// Consumer 5 values then tell producer to stop
+	for i := 0; i < valueCount; i++ {
+		value := <- resultsChannel
+		*result = append(*result, value)
+	}
+
+	// Tell consumer to stop
+	feedbackChannel <- "quit"
 }
 
 // Produce values until told to stop
