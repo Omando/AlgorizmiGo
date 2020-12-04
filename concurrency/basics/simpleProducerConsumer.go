@@ -8,7 +8,7 @@ var wg sync.WaitGroup
 type ValueGenerator func(previousValue int) int
 
 func BasicProducerConsumer(valueGenerator ValueGenerator, valueCount int) (results []int) {
-	wg.Add(2);
+	wg.Add(2);		// Waiting on 2 go routines
 
 	// Create channels to communicate results and feedback
 	resultsChannel := make(chan int)
