@@ -45,8 +45,7 @@ func Test_produce_and_consumer_values(t *testing.T) {
 	} {
 		{5,  concurrency_basics.GenerateIncrementalValues,[]int{1,2,3,4,5}},
 		{7,  concurrency_basics.GenerateIncrementalValues,[]int{1,2,3,4,5,6,7}},
-		{1,  concurrency_basics.GenerateIncrementalValues,[]int{1
-		}},
+		{1,  concurrency_basics.GenerateIncrementalValues,[]int{1}},
 	}
 
 	for _, test := range tests {
