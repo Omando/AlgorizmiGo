@@ -1,9 +1,12 @@
 package concurrency_basics
 
 import (
-	"AlgorizmiGo/concurrency/basics"
+	. "AlgorizmiGo/concurrency/basics"
 	"github.com/stretchr/testify/assert"
+	"math/rand"
+	"sync"
 	"testing"
+	"time"
 )
 
 func Test_should_calculate_sum_concurrently(t *testing.T) {
@@ -17,7 +20,7 @@ func Test_should_calculate_sum_concurrently(t *testing.T) {
 	}
 
 	for _, test := range tests {
-		actualSum := concurrency_basics.ConcurrentSum(test.input)
+		actualSum := ConcurrentSum(test.input)
 		assert.EqualValues(t, test.expectedSum, actualSum)
 	}
 }
@@ -32,24 +35,41 @@ func Test_should_receive_until_closed(t *testing.T) {
 	}
 
 	for _, test := range tests {
-		actualSum := concurrency_basics.ReceiveUntilClose(test.input)
+		actualSum := ReceiveUntilClose(test.input)
 		assert.EqualValues(t, test.expectedSum, actualSum)
 	}
 }
 
 func Test_produce_and_consumer_values(t *testing.T) {
 	tests := []struct {
-		valueCount 		int
-		generator		concurrency_basics.ValueGenerator
-		expectedOutput	[]int
+		valueCount     int
+		generator      ValueGenerator
+		expectedOutput []int
 	} {
-		{5,  concurrency_basics.GenerateIncrementalValues,[]int{1,2,3,4,5}},
-		{7,  concurrency_basics.GenerateIncrementalValues,[]int{1,2,3,4,5,6,7}},
-		{1,  concurrency_basics.GenerateIncrementalValues,[]int{1}},
+		{5, GenerateIncrementalValues,[]int{1,2,3,4,5}},
+		{7, GenerateIncrementalValues,[]int{1,2,3,4,5,6,7}},
+		{1, GenerateIncrementalValues,[]int{1}},
 	}
 
 	for _, test := range tests {
-		actualOutput := concurrency_basics.BasicProducerConsumer(test.generator, test.valueCount)
+		actualOutput := BasicProducerConsumer(test.generator, test.valueCount)
 		assert.EqualValues(t, test.expectedOutput, actualOutput)
+	}
+}
+
+func Test_atomic_counter_should_count_when_used_in_multiple_threads(t *testing.T) {
+	tests := []struct {
+		threadCount        int
+		countPerThread     int
+		expectedFinalCount int
+	} {
+		{1, 100, 100},
+		{5, 100, 500},
+		{10, 100, 1000},
+		{20, 1000, 20000},
+	}
+
+	for _, test := range tests {
+	
 	}
 }
