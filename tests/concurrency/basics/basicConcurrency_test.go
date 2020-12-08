@@ -3,10 +3,8 @@ package concurrency_basics
 import (
 	. "AlgorizmiGo/concurrency/basics"
 	"github.com/stretchr/testify/assert"
-	"math/rand"
 	"sync"
 	"testing"
-	"time"
 )
 
 func Test_should_calculate_sum_concurrently(t *testing.T) {
@@ -70,6 +68,25 @@ func Test_atomic_counter_should_count_when_used_in_multiple_threads(t *testing.T
 	}
 
 	for _, test := range tests {
-	
+		var atomicCounter AtomicCounter
+
+		// Two WaitGroups are used to synchronize the start and the end of goroutines
+		// All goroutines wait on this gate to be opened by the TestConcurrency function
+		var startGate sync.WaitGroup
+		startGate.Add(1)
+
+		// the test waits on this gate to be opened once all goroutines have completed
+		var completedGate sync.WaitGroup
+		completedGate.Add(test.threadCount)
+
+		// Fire all goroutines
+		startGate.Done()
+
+		// Wait for all goroutines to complete
+		completedGate.Wait()
+
+		// Check results
+		actualFinalCount := atomicCounter.Get()
+		assert.Equal(t, test.expectedFinalCount, actualFinalCount)
 	}
 }
