@@ -79,6 +79,17 @@ func Test_atomic_counter_should_count_when_used_in_multiple_threads(t *testing.T
 		var completedGate sync.WaitGroup
 		completedGate.Add(test.threadCount)
 
+		// Initialize the required number of goroutines but do not run them yet
+		for i := 0; i < test.threadCount; i++ {
+			go func(count int) {
+				// Wait until the main threads gives the start signal (increases concurrency)
+				startGate.Wait()
+
+				// Decrement gate count when this goroutine completes
+				completedGate.Done()
+			}(test.countPerThread)
+		}
+
 		// Fire all goroutines
 		startGate.Done()
 
