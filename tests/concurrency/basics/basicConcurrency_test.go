@@ -3,8 +3,10 @@ package concurrency_basics
 import (
 	. "AlgorizmiGo/concurrency/basics"
 	"github.com/stretchr/testify/assert"
+	"math/rand"
 	"sync"
 	"testing"
+	"time"
 )
 
 func Test_should_calculate_sum_concurrently(t *testing.T) {
@@ -84,6 +86,12 @@ func Test_atomic_counter_should_count_when_used_in_multiple_threads(t *testing.T
 			go func(count int) {
 				// Wait until the main threads gives the start signal (increases concurrency)
 				startGate.Wait()
+
+				// Increment the counter count times at random intervals (increases concurrency)
+				for i := 0; i < count; i++ {
+					atomicCounter.Increment()
+					time.Sleep(time.Millisecond * time.Duration(rand.Intn(10)))
+				}
 
 				// Decrement gate count when this goroutine completes
 				completedGate.Done()
