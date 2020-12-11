@@ -70,7 +70,7 @@ func Test_atomic_counter_should_count_when_used_in_multiple_threads(t *testing.T
 	}
 
 	for _, test := range tests {
-		var atomicCounter AtomicCounter
+		atomicCounter := AtomicCounter{}
 
 		// Two WaitGroups are used to synchronize the start and the end of goroutines
 		// All goroutines wait on this gate to be opened by the TestConcurrency function
