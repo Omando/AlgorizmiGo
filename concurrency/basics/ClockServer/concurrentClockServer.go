@@ -2,8 +2,10 @@ package ClockServer
 
 import (
 	"fmt"
+	"io"
 	"log"
 	"net"
+	"time"
 )
 
 
@@ -29,5 +31,15 @@ func Run(port int, maxConnections int) {
 }
 
 func processConnection(connection net.Conn) {
-	// todo
+	defer connection.Close()
+
+	// Write the current time to this connection every 1 second
+	for {
+		_, err :=  io.WriteString(connection, time.Now().Format("Mon Jan _2 15:04:05 2006\r"))
+		if err != nil {
+			fmt.Printf("Disconnecting from %s\n", connection.LocalAddr().String())
+			return		// client disconnected
+		}
+		time.Sleep(1 * time.Second)
+	}
 }
