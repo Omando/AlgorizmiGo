@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	// main -port 8000 -maxConn 2
+	// To run: go run main.go -port 2222 -maxConn 2
 	// Read port number from command line argument
 	var port *int = flag.Int("port", 8000,"-port 1234")
 	var maxConnections *int = flag.Int("maxConn", 2, "-maxConn 2")
