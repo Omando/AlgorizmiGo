@@ -23,7 +23,7 @@ func BasicProducerConsumer(valueGenerator ValueGenerator, valueCount int) (resul
 	return results
 }
 
-// Consume some results then tell producer to stop
+// Consume some results then tell producer to stopC
 func runConsumer(resultsChannel chan int, feedbackChannel chan string, valueCount int, result *[]int) {
 	// Schedule the call to WaitGroup's Done to tell goroutine is completed.
 	defer wg.Done()
