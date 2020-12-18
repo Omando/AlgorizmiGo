@@ -1,9 +1,12 @@
 package EchoServer
 
 import (
+	"bufio"
 	"fmt"
 	"log"
 	"net"
+	"strings"
+	"time"
 )
 
 func Run(port int, maxConn int) {
@@ -35,5 +38,20 @@ func Run(port int, maxConn int) {
 }
 
 func processConnection(connection net.Conn) {
-	// todo
+	defer connection.Close()
+
+	// Create a scanner to read from 'connection'
+	scanner := bufio.NewScanner(connection)
+
+	// Read data from this connection until it gets closed by client
+	for scanner.Scan() {
+		// We have data
+		fmt.Fprintf(connection, strings.ToUpper(scanner.Text()))
+		time.Sleep(1 * time.Second)
+		fmt.Fprintf(connection, strings.ToUpper(scanner.Text()))
+		time.Sleep(1 * time.Second)
+		fmt.Fprintf(connection, strings.ToUpper(scanner.Text()))
+	}
+
+	//No more data is available (client closed connection)
 }
