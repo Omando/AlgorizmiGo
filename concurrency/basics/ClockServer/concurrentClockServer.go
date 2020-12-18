@@ -8,7 +8,6 @@ import (
 	"time"
 )
 
-
 func Run(port int, maxConnections int) {
 	// Listen to incoming connections from clients
 	address := fmt.Sprint("localhost:", port)
