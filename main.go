@@ -1,7 +1,7 @@
 package main
 
 import (
-	"AlgorizmiGo/concurrency/basics/ClockServer"
+	"AlgorizmiGo/concurrency/basics/EchoServer"
 	"flag"
 	"fmt"
 )
@@ -14,5 +14,6 @@ func main() {
 	flag.Parse()
 	fmt.Printf("Listening on port %d. Maximum number of connections =%d \n", *port, *maxConnections)
 
-	ClockServer.Run(*port, *maxConnections)
+	//ClockServer.Run(*port, *maxConnections)
+	EchoServer.Run(*port, *maxConnections)
 }
