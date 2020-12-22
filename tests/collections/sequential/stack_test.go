@@ -1,4 +1,4 @@
-package sequentialCollections
+package sequential
 
 import (
 	"AlgorizmiGo/collections/sequential"
@@ -6,15 +6,15 @@ import (
 	"testing"
 )
 
-func TestNewQueueIsEmpty(t *testing.T) {
+func TestNewStackIsEmpty(t *testing.T) {
 	// Arrange
-	var queue = sequential.CreateQueue()
+	var stack = sequential.CreateStack(10)
 
 	// Act
-	assert.Equal(t, queue.IsEmpty(), true)
+	assert.Equal(t, stack.IsEmpty(), true)
 }
 
-func TestShouldEnqueueItems(t *testing.T) {
+func TestShouldPushItems(t *testing.T) {
 	tests := []struct {
 		name  string
 		data  []int
@@ -27,41 +27,41 @@ func TestShouldEnqueueItems(t *testing.T) {
 
 	for _, test := range tests {
 		t.Run(test.name, func(t *testing.T) {
-			var queue sequential.Queue = sequential.CreateQueue()
+			var stack sequential.Stack = sequential.CreateStack(4)
 			for _, n := range test.data {
-				queue.Enqueue(n)
+				stack.Push(sequential.Item{n})
 			}
 
-			if queue.Size() != test.count {
-				t.Errorf("queue.Size() :%v, expected:%v", queue.Size(), test.count)
+			if stack.Size() != test.count {
+				t.Errorf("stack.Size() :%v, expected:%v", stack.Size(), test.count)
 			}
 		})
 	}
 }
 
-func TestShouldDequeueItems(t *testing.T) {
+func TestShouldPopItems(t *testing.T) {
 	tests := []struct {
 		name           string
 		input          []int
 		expectedOutput []int
 	}{
 		{name: "test1", input: nil, expectedOutput: nil},
-		{name: "test2", input: []int{1, 2, 3}, expectedOutput: []int{1, 2, 3}},
+		{name: "test2", input: []int{1, 2, 3}, expectedOutput: []int{3, 2, 1}},
 	}
 
 	for _, test := range tests {
 		t.Run(test.name, func(t *testing.T) {
-			var queue sequential.Queue = sequential.CreateQueue()
+			var stack sequential.Stack = sequential.CreateStack(5)
 			for _, n := range test.input {
-				queue.Enqueue(n)
+				stack.Push(sequential.Item{n})
 			}
 
 			// Collect Pop outputs
 			var actualOutput []int // slice!
-			for !queue.IsEmpty() { // conditional while
-				data, err := queue.Dequeue()
+			for !stack.IsEmpty() { // conditional while
+				data, err := stack.Pop()
 				if err == nil {
-					actualOutput = append(actualOutput, data)
+					actualOutput = append(actualOutput, data.Value)
 				}
 			}
 

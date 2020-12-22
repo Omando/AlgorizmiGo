@@ -1,4 +1,4 @@
-package sequentialCollections
+package sequential
 
 import (
 	"AlgorizmiGo/collections/sequential"
@@ -6,15 +6,15 @@ import (
 	"testing"
 )
 
-func TestNewStackIsEmpty(t *testing.T) {
+func TestNewQueueIsEmpty(t *testing.T) {
 	// Arrange
-	var stack = sequential.CreateStack(10)
+	var queue = sequential.CreateQueue()
 
 	// Act
-	assert.Equal(t, stack.IsEmpty(), true)
+	assert.Equal(t, queue.IsEmpty(), true)
 }
 
-func TestShouldPushItems(t *testing.T) {
+func TestShouldEnqueueItems(t *testing.T) {
 	tests := []struct {
 		name  string
 		data  []int
@@ -27,41 +27,41 @@ func TestShouldPushItems(t *testing.T) {
 
 	for _, test := range tests {
 		t.Run(test.name, func(t *testing.T) {
-			var stack sequential.Stack = sequential.CreateStack(4)
+			var queue sequential.Queue = sequential.CreateQueue()
 			for _, n := range test.data {
-				stack.Push(sequential.Item{n})
+				queue.Enqueue(n)
 			}
 
-			if stack.Size() != test.count {
-				t.Errorf("stack.Size() :%v, expected:%v", stack.Size(), test.count)
+			if queue.Size() != test.count {
+				t.Errorf("queue.Size() :%v, expected:%v", queue.Size(), test.count)
 			}
 		})
 	}
 }
 
-func TestShouldPopItems(t *testing.T) {
+func TestShouldDequeueItems(t *testing.T) {
 	tests := []struct {
 		name           string
 		input          []int
 		expectedOutput []int
 	}{
 		{name: "test1", input: nil, expectedOutput: nil},
-		{name: "test2", input: []int{1, 2, 3}, expectedOutput: []int{3, 2, 1}},
+		{name: "test2", input: []int{1, 2, 3}, expectedOutput: []int{1, 2, 3}},
 	}
 
 	for _, test := range tests {
 		t.Run(test.name, func(t *testing.T) {
-			var stack sequential.Stack = sequential.CreateStack(5)
+			var queue sequential.Queue = sequential.CreateQueue()
 			for _, n := range test.input {
-				stack.Push(sequential.Item{n})
+				queue.Enqueue(n)
 			}
 
 			// Collect Pop outputs
 			var actualOutput []int // slice!
-			for !stack.IsEmpty() { // conditional while
-				data, err := stack.Pop()
+			for !queue.IsEmpty() { // conditional while
+				data, err := queue.Dequeue()
 				if err == nil {
-					actualOutput = append(actualOutput, data.Value)
+					actualOutput = append(actualOutput, data)
 				}
 			}
 
