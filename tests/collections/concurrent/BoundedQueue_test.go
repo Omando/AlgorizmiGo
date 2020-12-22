@@ -1,4 +1,4 @@
-package collections
+package concurrent
 
 import (
 	"AlgorizmiGo/collections/concurrent" // note use of fully qualified path
