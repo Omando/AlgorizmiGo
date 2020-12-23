@@ -1,7 +1,9 @@
 package sequential
 
 import (
-	"AlgorizmiGo/collections/sequential"
+	"AlgorizmiGo/collections/sequential/LinkedList"
+	"AlgorizmiGo/collections/sequential/LinkedList/DoublyLinkedList"
+	"AlgorizmiGo/collections/sequential/LinkedList/SinglyLinkedList"
 	"fmt"
 	"github.com/cucumber/godog"
 	"os"
@@ -9,34 +11,41 @@ import (
 	"testing"
 )
 
-var list *sequential.SinglyLinkedList
+var list LinkedList.LinkedList // interface implemented by SinglyLinkedList and DoublyLinkedList
 var isItemFound bool
 
 /*  Given */
-func aNewLinkedList() error {
-	list = sequential.New()
+//s.Step(`^linked list implementation is impName$`, linkedListImplementation)
+func linkedListImplementation(arg string) error {
+	if arg == "SinglyLinkedList" {
+		list = SinglyLinkedList.New()
+	} else if arg == "DoublyLinkedList" {
+		list = DoublyLinkedList.New()
+	}
 	return nil
 }
 
 func iAppendItems(items *godog.Table) error {
-	for i:= 1; i < len(items.Rows); i++ {
+	for i := 1; i < len(items.Rows); i++ {
 		value, err := strconv.Atoi(items.Rows[i].Cells[0].Value)
-		if err != nil {}
-			list.Append(value)
+		if err != nil {
+		}
+		list.Append(value)
 	}
 	return nil
 }
 
 /* When */
 func iCreateANewList() error {
-	list = sequential.New()
+	list = SinglyLinkedList.New()
 	return nil
 }
 
 func iPrependItems(items *godog.Table) error {
-	for i:= 1; i < len(items.Rows); i++ {
+	for i := 1; i < len(items.Rows); i++ {
 		value, err := strconv.Atoi(items.Rows[i].Cells[0].Value)
-		if err != nil {}
+		if err != nil {
+		}
 		list.Prepend(value)
 	}
 	return nil
@@ -97,7 +106,7 @@ func tailIs(expectedValue int) error {
 }
 
 func InitializeScenario(s *godog.ScenarioContext) {
-	s.Step(`^A new linked list$`, aNewLinkedList)
+	s.Step(`^linked list implementation is "([^"]*)"$`, linkedListImplementation)
 	s.Step(`^head and tail are nil and size is zero$`, headAndTailAreNilAndSizeIsZero)
 	s.Step(`^Head is (\d+)$`, headIs)
 	s.Step(`^I append items$`, iAppendItems)
@@ -117,9 +126,9 @@ func Test_Runner(t *testing.T) {
 	}
 
 	status := godog.TestSuite{
-		Name:                 "",
-		ScenarioInitializer:  InitializeScenario,
-		Options:              &opts,
+		Name:                "",
+		ScenarioInitializer: InitializeScenario,
+		Options:             &opts,
 	}.Run()
 
 	os.Exit(status)
