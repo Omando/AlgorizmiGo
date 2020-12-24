@@ -39,7 +39,7 @@ func (list *SinglyLinkedList) init() *SinglyLinkedList {
 // First returns the first element of list l or nil if the list is empty.
 func (list *SinglyLinkedList) First() (interface{}, error) {
 	if list.size == 0 {
-		return nil, errors.New("List is empty")
+		return nil, errors.New("list is empty")
 	}
 	return list.head.value, nil
 }
@@ -47,7 +47,7 @@ func (list *SinglyLinkedList) First() (interface{}, error) {
 // Last returns the last element of list l or nil if the list is empty.
 func (list *SinglyLinkedList) Last() (interface{}, error) {
 	if list.size == 0 {
-		return nil, errors.New("List is empty")
+		return nil, errors.New("list is empty")
 	}
 	return list.tail.value, nil
 }
@@ -91,6 +91,10 @@ func (list *SinglyLinkedList) Append(value interface{}) {
 // Remove deletes the given node if found, and returns value of removed node.
 // Panics if value was not found
 func (list *SinglyLinkedList) Remove(value interface{}) (interface{}, error) {
+	if list.size == 0 {
+		return nil, errors.New("list is empty")
+	}
+
 	// Iterate until we find a node with the given given value
 	var previous *LinkedListNode
 	for node := list.head; node != nil; node = node.next {
