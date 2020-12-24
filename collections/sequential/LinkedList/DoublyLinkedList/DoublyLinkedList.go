@@ -35,7 +35,7 @@ func New() *DoublyLinkedList {
 // First returns the first element of list l or nil if the list is empty.
 func (list *DoublyLinkedList) First() (interface{}, error) {
 	if list.size == 0 {
-		return nil, errors.New("List is empty")
+		return nil, errors.New("list is empty")
 	}
 
 	// Note use of headSentinel.next
@@ -45,7 +45,7 @@ func (list *DoublyLinkedList) First() (interface{}, error) {
 // Last returns the last element of list l or nil if the list is empty.
 func (list *DoublyLinkedList) Last() (interface{}, error) {
 	if list.size == 0 {
-		return nil, errors.New("List is empty")
+		return nil, errors.New("list is empty")
 	}
 
 	// Note use of tailSentinel.previous
@@ -74,6 +74,10 @@ func (list *DoublyLinkedList) Append(element interface{}) {
 // deleting the given value
 // 2) Draw and connect two double linked nodes after deleting the node for the given value
 func (list *DoublyLinkedList) Remove(element interface{}) (interface{}, error) {
+	if list.size == 0 {
+		return nil, errors.New("list is empty")
+	}
+
 	// Locate the node first
 	nodeToDelete, err := findNode(list, element)
 	if err != nil {
@@ -139,5 +143,5 @@ func findNode(list *DoublyLinkedList, value interface{}) (*DoublyNode, error) {
 		}
 	}
 
-	return nil, errors.New("Value not found")
+	return nil, errors.New("value not found")
 }
