@@ -2,6 +2,7 @@ package sequential
 
 import (
 	"AlgorizmiGo/collections/sequential/LinkedList"
+	"AlgorizmiGo/collections/sequential/LinkedList/CicularyLinkedList"
 	"AlgorizmiGo/collections/sequential/LinkedList/DoublyLinkedList"
 	"AlgorizmiGo/collections/sequential/LinkedList/SinglyLinkedList"
 	"fmt"
@@ -21,7 +22,10 @@ func linkedListImplementation(arg string) error {
 		list = SinglyLinkedList.New()
 	} else if arg == "DoublyLinkedList" {
 		list = DoublyLinkedList.New()
+	} else if arg == "CircularlyLinkedList" {
+		list = CircularlyLinkedList.New()
 	}
+
 	return nil
 }
 
@@ -53,7 +57,10 @@ func iPrependItems(items *godog.Table) error {
 
 func iRemove(arg1 int) error {
 	_, err := list.Remove(arg1)
-	return err
+	if err != nil {
+		isItemFound = false
+	}
+	return nil
 }
 
 func iSearchFor(arg1 int) error {
