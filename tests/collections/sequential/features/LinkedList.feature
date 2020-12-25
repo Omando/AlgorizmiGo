@@ -8,6 +8,7 @@ Feature: Singly linked list
     |implementation  |
     |SinglyLinkedList|
     |DoublyLinkedList|
+    |CircularlyLinkedList|
 
   Scenario Outline: Appending
     Given linked list implementation is "<implementation>"
@@ -22,6 +23,7 @@ Feature: Singly linked list
       |implementation|
       |SinglyLinkedList|
       |DoublyLinkedList|
+      |CircularlyLinkedList|
 
   Scenario Outline: Prepending
     Given linked list implementation is "<implementation>"
@@ -36,6 +38,7 @@ Feature: Singly linked list
       |implementation|
       |SinglyLinkedList|
       |DoublyLinkedList|
+      |CircularlyLinkedList|
 
   Scenario Outline: Removing head
     Given linked list implementation is "<implementation>"
@@ -51,6 +54,7 @@ Feature: Singly linked list
       |implementation|
       |SinglyLinkedList|
       |DoublyLinkedList|
+      |CircularlyLinkedList|
 
   Scenario Outline: Removing tail
     Given linked list implementation is "<implementation>"
@@ -66,6 +70,7 @@ Feature: Singly linked list
       |implementation|
       |SinglyLinkedList|
       |DoublyLinkedList|
+      |CircularlyLinkedList|
 
   Scenario Outline: Removing inner item
     Given linked list implementation is "<implementation>"
@@ -81,6 +86,22 @@ Feature: Singly linked list
       |implementation|
       |SinglyLinkedList|
       |DoublyLinkedList|
+      |CircularlyLinkedList|
+
+  Scenario Outline: Removing non-existing item
+    Given linked list implementation is "<implementation>"
+    And  I append items
+      |value|
+      |1    |
+      |2    |
+      |3    |
+    When I remove 100
+    Then item is not found
+    Examples:
+      |implementation|
+      |SinglyLinkedList|
+      |DoublyLinkedList|
+      |CircularlyLinkedList|
 
   Scenario Outline: Finding an existing item
     Given linked list implementation is "<implementation>"
@@ -95,6 +116,7 @@ Feature: Singly linked list
       |implementation|
       |SinglyLinkedList|
       |DoublyLinkedList|
+      |CircularlyLinkedList|
 
   Scenario Outline: Finding a non-existing item
     Given linked list implementation is "<implementation>"
@@ -109,3 +131,4 @@ Feature: Singly linked list
       |implementation|
       |SinglyLinkedList|
       |DoublyLinkedList|
+      |CircularlyLinkedList|
