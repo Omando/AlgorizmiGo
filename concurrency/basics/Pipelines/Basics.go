@@ -30,24 +30,24 @@ func Run() {
 }
 
 // Pipeline stage 1: generate number 0from 0 to 9 on channel ch
-func counter(ch chan int) {
+func counter(incoming chan int) {
 	for x := 0; x < 10; x++ {
-		ch <- x
+		incoming <- x
 	}
 }
 
 // Pipeline stage 2: Receive numbers from channel, square them, then send results
 // on a different channel
-func squarer(receive chan int, send chan int) {
+func squarer(incoming chan int, outgoing chan int) {
 	for {
-		value := <-receive
-		send <- value * value
+		value := <-incoming
+		outgoing <- value * value
 	}
 }
 
 // Pipeline stage 2: Receive results from channel and display
-func printer(receive chan int) {
+func printer(incoming chan int) {
 	for {
-		fmt.Printf("Receive value: %d\n", <-receive)
+		fmt.Printf("Receive value: %d\n", <-incoming)
 	}
 }
