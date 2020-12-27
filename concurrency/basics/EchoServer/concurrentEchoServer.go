@@ -9,6 +9,7 @@ import (
 	"time"
 )
 
+// To run: go run main.go -port 2222 -maxConn 2
 func Run(port int, maxConn int) {
 	address := fmt.Sprintf("localhost:%d", port)
 	listener, err := net.Listen("tcp", address)

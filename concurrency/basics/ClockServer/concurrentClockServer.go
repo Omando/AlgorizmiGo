@@ -8,12 +8,13 @@ import (
 	"time"
 )
 
+// To run: go run main.go -port 2222 -maxConn 2
 func Run(port int, maxConnections int) {
 	// Listen to incoming connections from clients
 	address := fmt.Sprint("localhost:", port)
 	listener, err := net.Listen("tcp", address)
-	if (err != nil) {
-		log.Fatal(err)		// Fatal is equivalent to Print() followed by a call to os.Exit(1).
+	if err != nil {
+		log.Fatal(err) // Fatal is equivalent to Print() followed by a call to os.Exit(1).
 	}
 	fmt.Printf("Listening on address: %s\n", address)
 
@@ -44,10 +45,10 @@ func processConnection(connection net.Conn) {
 		// Because net.Conn satisfies the io.Writer interface, the time is written directly to it
 		// The time.Time.Format method provides a way to for mat date and time informatton by
 		// example
-		_, err :=  io.WriteString(connection, time.Now().Format("Mon Jan _2 15:04:05 2006\r"))
+		_, err := io.WriteString(connection, time.Now().Format("Mon Jan _2 15:04:05 2006\r"))
 		if err != nil {
 			fmt.Printf("Disconnecting from %s\n", connection.LocalAddr().String())
-			return		// client disconnected
+			return // client disconnected
 		}
 		time.Sleep(1 * time.Second)
 	}
