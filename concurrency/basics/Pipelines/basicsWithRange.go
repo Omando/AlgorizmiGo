@@ -10,28 +10,28 @@ the loop after the last one. Also unidirectional channels are used to restrict
 a channel to send-only or receive-only
 */
 func RunWithRange() {
-	// Create channel used to transfer information through the pipeline
+	// Create channels used to move information through the pipeline
 	numbers := make(chan int)
 	squares := make(chan int)
 
-	// The pipeline is composed of 3 subroutines with each piece of information
+	// The pipeline is composed of 3 stages with each piece of information
 	// (a number in this case) flowing from counter to squarer to printer.
-	go counterv2(numbers)          // publish on numbers
-	go squarerv2(numbers, squares) // receive on numbers and publish on squares
-	go printerv2(squares)          // receive on squares
+	go counterV2(numbers)          // publish on numbers
+	go squarerV2(numbers, squares) // receive on numbers and publish on squares
+	go printerV2(squares)          // receive on squares
 }
 
-// Pipeline stage 1: generate number 0from 0 to 9 on channel ch
-func counterv2(outgoing chan<- int) {
+// Pipeline stage 1: generate numbers from 0 to 9 on outgoing channel
+func counterV2(outgoing chan<- int) {
 	defer close(outgoing)
 	for x := 0; x < 10; x++ {
 		outgoing <- x
 	}
 }
 
-// Pipeline stage 2: Receive numbers from channel, square them, then send results
-// on a different channel
-func squarerv2(incoming <-chan int, outgoing chan<- int) {
+// Pipeline stage 2: Receive numbers from incoming channel, square them, then send
+// results on outgoing channel
+func squarerV2(incoming <-chan int, outgoing chan<- int) {
 	defer close(outgoing)
 
 	// Note use of range to receive values and detect when a channel is closed
@@ -40,8 +40,8 @@ func squarerv2(incoming <-chan int, outgoing chan<- int) {
 	}
 }
 
-// Pipeline stage 2: Receive results from channel and display
-func printerv2(incoming <-chan int) {
+// Pipeline stage 2: Receive results from incoming channel and display
+func printerV2(incoming <-chan int) {
 
 	// Note use of range to receive values and detect when a channel is closed
 	for value := range incoming {
