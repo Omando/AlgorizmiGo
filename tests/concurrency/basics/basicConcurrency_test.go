@@ -2,6 +2,7 @@ package concurrency_basics
 
 import (
 	. "AlgorizmiGo/concurrency/basics"
+	"fmt"
 	"github.com/stretchr/testify/assert"
 	"math/rand"
 	"sync"
@@ -109,4 +110,26 @@ func Test_atomic_counter_should_count_when_used_in_multiple_threads(t *testing.T
 		assert.Equal(t, test.expectedFinalCount, actualFinalCount)
 	}
 }
+
+func Test_run_for_loop_in_parallel(t *testing.T) {
+	tests := []struct {
+		input 		[]interface{}
+	} {
+		{[]interface{}{1,2,3,4}},
+		{[]interface{}{-1,1,-10,10}},
+		{[]interface{}{2,4,6,8,10}},
+	}
+
+	for _, test := range tests {
+		action := func(data interface{}) interface{} {
+			result := data.(int) * 10
+			return result
+		}
+		results := ParallelFor(test.input, action)
+
+		// todo: Need to validate results (results not in order!)
+		fmt.Println(results)
+	}
+}
+
 
