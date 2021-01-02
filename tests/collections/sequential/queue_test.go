@@ -57,7 +57,7 @@ func TestShouldDequeueItems(t *testing.T) {
 			}
 
 			// Collect Pop outputs
-			var actualOutput []int // slice!
+			var actualOutput []interface{} // slice!
 			for !queue.IsEmpty() { // conditional while
 				data, err := queue.Dequeue()
 				if err == nil {
