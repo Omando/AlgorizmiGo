@@ -5,7 +5,7 @@ import "errors"
 /* Queue implementation using a linked list as the underlying data structure */
 
 type node struct {
-	data int
+	data interface{}
 	next *node
 }
 
@@ -24,7 +24,7 @@ func (q *Queue) IsEmpty() bool {
 	return q.head == nil
 }
 
-func (q *Queue) Enqueue(data int) {
+func (q *Queue) Enqueue(data interface{}) {
 	// Create a new node and append at the end
 	var newNode node = node{data: data, next: nil}
 
@@ -42,7 +42,7 @@ func (q *Queue) Enqueue(data int) {
 	q.size++
 }
 
-func (q *Queue) Dequeue() (int, error) {
+func (q *Queue) Dequeue() (interface{}, error) {
 	if q.IsEmpty() {
 		return 0, errors.New("Queue is empty")
 	}
