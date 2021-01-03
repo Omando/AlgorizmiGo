@@ -1,7 +1,6 @@
 package recursion
 
 import (
-	"AlgorizmiGo/linkedLists"
 	"AlgorizmiGo/recursion"
 	"github.com/stretchr/testify/assert"
 	"testing"
@@ -9,8 +8,8 @@ import (
 
 func TestSwappingLinkedListNodes(t *testing.T) {
 	tests := []struct {
-		head                      *linkedLists.Node
-		expectedSwappedLinkedList *linkedLists.Node
+		head                      *recursion.Node
+		expectedSwappedLinkedList *recursion.Node
 	}{
 		{head: getLinkedList1(), expectedSwappedLinkedList: getSwappedLinkedList1()},
 	}
@@ -28,20 +27,20 @@ func TestSwappingLinkedListNodes(t *testing.T) {
 	}
 }
 
-func getLinkedList1() *linkedLists.Node {
-	ll := linkedLists.SimpleSinglyLinkedList{}
-	ll.Append(1)
-	ll.Append(2)
-	ll.Append(3)
-	ll.Append(4)
-	return ll.Head()
+func getLinkedList1() *recursion.Node {
+	var node4 = recursion.Node{4, nil}
+	var node3 = recursion.Node{3, &node4}
+	var node2 = recursion.Node{2, &node3}
+	var node1 = recursion.Node{1, &node2}
+
+	return &node1
 }
 
-func getSwappedLinkedList1() *linkedLists.Node {
-	ll := linkedLists.SimpleSinglyLinkedList{}
-	ll.Append(2)
-	ll.Append(1)
-	ll.Append(4)
-	ll.Append(3)
-	return ll.Head()
+func getSwappedLinkedList1() *recursion.Node {
+	var node4 = recursion.Node{3, nil}
+	var node3 = recursion.Node{4, &node4}
+	var node2 = recursion.Node{1, &node3}
+	var node1 = recursion.Node{2, &node2}
+
+	return &node1
 }
