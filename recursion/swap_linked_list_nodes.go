@@ -4,6 +4,7 @@ type Node struct {
 	Value int
 	Next *Node
 }
+
 func SwapLinkedListNodes(head *Node) *Node {
 	// Must append a dummy
 	var dummy *Node = &Node{Value: 0, Next: head}
