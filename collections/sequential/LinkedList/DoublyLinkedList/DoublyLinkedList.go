@@ -1,4 +1,4 @@
-package DoublyLinkedList
+package doublyLinkedList
 
 import (
 	"errors"
