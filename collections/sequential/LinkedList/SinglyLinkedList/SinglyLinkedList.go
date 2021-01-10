@@ -1,4 +1,4 @@
-package SinglyLinkedList
+package singlyLinkedList
 
 import (
 	"errors"
@@ -21,8 +21,8 @@ type SinglyLinkedList struct {
 func New() *SinglyLinkedList {
 	// Recall that new returns a pointer to a newly allocated zero value of the given type
 	// Can also use:
-	//	return &SinglyLinkedList{head: nil, tail: nil, size: 0}
-	//	return (&SinglyLinkedList{}).init()
+	//	return &singlyLinkedList{head: nil, tail: nil, size: 0}
+	//	return (&singlyLinkedList{}).init()
 	return new(SinglyLinkedList).init() // same as:
 }
 
