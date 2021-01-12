@@ -2,9 +2,9 @@ package sequential
 
 import (
 	"AlgorizmiGo/collections/sequential/LinkedList"
-	"AlgorizmiGo/collections/sequential/LinkedList/CicularyLinkedList"
-	"AlgorizmiGo/collections/sequential/LinkedList/DoublyLinkedList"
-	"AlgorizmiGo/collections/sequential/LinkedList/SinglyLinkedList"
+	"AlgorizmiGo/collections/sequential/LinkedList/cicularyLinkedList"
+	"AlgorizmiGo/collections/sequential/LinkedList/doublyLinkedList"
+	"AlgorizmiGo/collections/sequential/LinkedList/singlyLinkedList"
 	"fmt"
 	"github.com/cucumber/godog"
 	"os"
@@ -12,16 +12,16 @@ import (
 	"testing"
 )
 
-var list LinkedList.LinkedList // interface implemented by SinglyLinkedList and DoublyLinkedList
+var list LinkedList.LinkedList // interface implemented by singlyLinkedList and doublyLinkedList
 var isItemFound bool
 
 /*  Given */
 //s.Step(`^linked list implementation is impName$`, linkedListImplementation)
 func linkedListImplementation(arg string) error {
-	if arg == "SinglyLinkedList" {
-		list = SinglyLinkedList.New()
-	} else if arg == "DoublyLinkedList" {
-		list = DoublyLinkedList.New()
+	if arg == "singlyLinkedList" {
+		list = singlyLinkedList.New()
+	} else if arg == "doublyLinkedList" {
+		list = doublyLinkedList.New()
 	} else if arg == "CircularlyLinkedList" {
 		list = CircularlyLinkedList.New()
 	}
@@ -41,7 +41,7 @@ func iAppendItems(items *godog.Table) error {
 
 /* When */
 func iCreateANewList() error {
-	list = SinglyLinkedList.New()
+	list = singlyLinkedList.New()
 	return nil
 }
 
