@@ -1,8 +1,8 @@
-package Pipelines
+package pipelines
 
 import "fmt"
 
-/* Pipelines 101
+/* pipelines 101
  This code is VERY basic and minimal. It only serves to illustrate the overall concept of
  pipelines using channels
  Output:
