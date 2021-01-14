@@ -1,4 +1,4 @@
-package EchoServer
+package echoServer
 
 import (
 	"bufio"
