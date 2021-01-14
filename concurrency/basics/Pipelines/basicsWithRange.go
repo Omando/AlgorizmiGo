@@ -1,10 +1,10 @@
-package Pipelines
+package pipelines
 
 import (
 	"fmt"
 )
 
-/* Pipelines 102
+/* pipelines 102
 range is used to receive all the values sent on a channel and then terminate
 the loop after the last one. Also unidirectional channels are used to restrict
 a channel to send-only or receive-only
