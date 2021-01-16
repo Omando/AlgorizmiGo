@@ -1,4 +1,4 @@
-package ClockServer
+package clockServer
 
 import (
 	"fmt"
