@@ -1,4 +1,4 @@
-package WebCrawler
+package webCrawler
 
 import (
 	"AlgorizmiGo/collections/sequential"
