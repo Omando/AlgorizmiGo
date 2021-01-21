@@ -1,7 +1,10 @@
 package concurrency_basics
 
 import (
-	. "AlgorizmiGo/concurrency/basics"
+	"AlgorizmiGo/concurrency/basics/counters"
+	"AlgorizmiGo/concurrency/basics/looping"
+	"AlgorizmiGo/concurrency/basics/pubsub"
+	"AlgorizmiGo/concurrency/basics/simple"
 	"fmt"
 	"github.com/stretchr/testify/assert"
 	"math/rand"
@@ -12,31 +15,31 @@ import (
 
 func Test_should_calculate_sum_concurrently(t *testing.T) {
 	tests := []struct {
-		input 		[]int
-		expectedSum	int
-	} {
-		{[]int{1,2,3,4}, 10},
-		{[]int{-1,1,-10,10}, 0},
-		{[]int{2,4,6,8,10}, 30},
+		input       []int
+		expectedSum int
+	}{
+		{[]int{1, 2, 3, 4}, 10},
+		{[]int{-1, 1, -10, 10}, 0},
+		{[]int{2, 4, 6, 8, 10}, 30},
 	}
 
 	for _, test := range tests {
-		actualSum := ConcurrentSum(test.input)
+		actualSum := simple.ConcurrentSum(test.input)
 		assert.EqualValues(t, test.expectedSum, actualSum)
 	}
 }
 
 func Test_should_receive_until_closed(t *testing.T) {
 	tests := []struct {
-		input 		int
-		expectedSum	int
-	} {
+		input       int
+		expectedSum int
+	}{
 		{5, 15},
 		{6, 21},
 	}
 
 	for _, test := range tests {
-		actualSum := ReceiveUntilClose(test.input)
+		actualSum := simple.ReceiveUntilClose(test.input)
 		assert.EqualValues(t, test.expectedSum, actualSum)
 	}
 }
@@ -44,16 +47,16 @@ func Test_should_receive_until_closed(t *testing.T) {
 func Test_produce_and_consumer_values(t *testing.T) {
 	tests := []struct {
 		valueCount     int
-		generator      ValueGenerator
+		generator      pubsub.ValueGenerator
 		expectedOutput []int
-	} {
-		{5, GenerateIncrementalValues,[]int{1,2,3,4,5}},
-		{7, GenerateIncrementalValues,[]int{1,2,3,4,5,6,7}},
-		{1, GenerateIncrementalValues,[]int{1}},
+	}{
+		{5, pubsub.GenerateIncrementalValues, []int{1, 2, 3, 4, 5}},
+		{7, pubsub.GenerateIncrementalValues, []int{1, 2, 3, 4, 5, 6, 7}},
+		{1, pubsub.GenerateIncrementalValues, []int{1}},
 	}
 
 	for _, test := range tests {
-		actualOutput := BasicProducerConsumer(test.generator, test.valueCount)
+		actualOutput := pubsub.BasicProducerConsumer(test.generator, test.valueCount)
 		assert.EqualValues(t, test.expectedOutput, actualOutput)
 	}
 }
@@ -63,7 +66,7 @@ func Test_atomic_counter_should_count_when_used_in_multiple_threads(t *testing.T
 		threadCount        int
 		countPerThread     int
 		expectedFinalCount int
-	} {
+	}{
 		{1, 100, 100},
 		{5, 100, 500},
 		{10, 100, 1000},
@@ -71,7 +74,7 @@ func Test_atomic_counter_should_count_when_used_in_multiple_threads(t *testing.T
 	}
 
 	for _, test := range tests {
-		atomicCounter := AtomicCounter{}
+		atomicCounter := counters.AtomicCounter{}
 
 		// Two WaitGroups are used to synchronize the start and the end of goroutines
 		// All goroutines wait on this gate to be opened by the main test function
@@ -113,11 +116,11 @@ func Test_atomic_counter_should_count_when_used_in_multiple_threads(t *testing.T
 
 func Test_run_for_loop_in_parallel(t *testing.T) {
 	tests := []struct {
-		input 		[]interface{}
-	} {
-		{[]interface{}{1,2,3,4}},
-		{[]interface{}{-1,1,-10,10}},
-		{[]interface{}{2,4,6,8,10}},
+		input []interface{}
+	}{
+		{[]interface{}{1, 2, 3, 4}},
+		{[]interface{}{-1, 1, -10, 10}},
+		{[]interface{}{2, 4, 6, 8, 10}},
 	}
 
 	for _, test := range tests {
@@ -125,11 +128,9 @@ func Test_run_for_loop_in_parallel(t *testing.T) {
 			result := data.(int) * 10
 			return result
 		}
-		results := ParallelFor(test.input, action)
+		results := looping.ParallelFor(test.input, action)
 
 		// todo: Need to validate results (results not in order!)
 		fmt.Println(results)
 	}
 }
-
-
