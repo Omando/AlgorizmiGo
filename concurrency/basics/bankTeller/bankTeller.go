@@ -40,6 +40,28 @@ func RunTeller() {
 	accounts["EF"] = 300
 
 	go func() {
-		// todo
+		for {
+			select {
+			case depositRequest := <-chAccountUpdate:
+				// find the account
+				balance, ok := accounts[depositRequest.AccountNo]
+				if ok {
+					// Account fund. Update balance
+					accounts[depositRequest.AccountNo] = balance + depositRequest.Deposit
+
+					// Send updated balance back to client
+					ChAccountReply <- AccountReply{
+						AccountNo: depositRequest.AccountNo,
+						Balance:   accounts[depositRequest.AccountNo],
+					}
+				}
+			case query := <-chAccountQuery:
+				// find the account and send the balance back
+				balance, ok := accounts[query.AccountNo]
+				if ok {
+					ChAccountReply <- AccountReply{AccountNo: query.AccountNo, Balance:   balance,}
+				}
+			}
+		}
 	}()
 }
