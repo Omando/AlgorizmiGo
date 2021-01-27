@@ -1,7 +1,7 @@
 package main
 
 import (
-	"AlgorizmiGo/concurrency/basics/chatServer"
+	"AlgorizmiGo/concurrency/basics/nonBlockingCache"
 	"flag"
 	"fmt"
 )
@@ -24,7 +24,12 @@ func main() {
 	//counters.AbortableCountdown(10);
 	//diretoryTraversal.TraverseRoots([]string{"C:\\Temp"})
 	//diretoryTraversal.TraverseRootsAndMultiplexResults([]string{"C:\\Temp"})
-	chatServer.Run(*port)
+	//chatServer.Run(*port)
+	nonBlockingCache.RunConcurrent()
 
 	fmt.Println("Completed")
 }
+
+
+
+
