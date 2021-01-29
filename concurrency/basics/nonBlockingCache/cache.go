@@ -34,5 +34,14 @@ func New(f Func) *Memo {
 }
 
 func (memo *Memo) Get(key string) (interface{}, error) {
+	memo.lock.Lock()
 
+	// Try to get the key's value
+	var e *entry = memo.cache[key]
+	if  e == nil {
+		// todo
+	} else {
+		// todo
+	}
+	return e.res.value, e.res.err
 }
