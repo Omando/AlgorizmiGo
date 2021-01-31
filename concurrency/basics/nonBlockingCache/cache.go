@@ -39,7 +39,20 @@ func (memo *Memo) Get(key string) (interface{}, error) {
 	// Try to get the key's value
 	var e *entry = memo.cache[key]
 	if  e == nil {
-		// todo
+		// Data is not available. Create a cache entry for this key, but keep the entry's
+		// channel open until the result is ready. Other clients can get this entry, but
+		// the channel will block until data is ready
+		e = &entry{
+			ready: make(chan struct{}),
+		}
+		memo.cache[key] = e
+		memo.lock.Unlock()
+
+		// Perform initialization. Only one goroutine can ever execute this line
+		e.res.value, e.res.err = memo.f(key);
+
+		// Data is now ready. Broadcast over the channel
+		close(e.ready)
 	} else {
 		// todo
 	}
