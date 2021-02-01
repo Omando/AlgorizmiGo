@@ -54,7 +54,11 @@ func (memo *Memo) Get(key string) (interface{}, error) {
 		// Data is now ready. Broadcast over the channel
 		close(e.ready)
 	} else {
-		// todo
+		// Entry is available so unlock. But...
+		memo.lock.Unlock()
+
+		// data may not be ready yet so wait for it by blocking (if required) on the entry's channel
+		<- e.ready
 	}
 	return e.res.value, e.res.err
 }
